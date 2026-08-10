@@ -138,6 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const openModalBtns = document.querySelectorAll('.open-modal-btn');
     const modalOverlay = document.getElementById('enquiryModal');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const stallCancelBtn = document.getElementById('stallCancelBtn');
+    const visitorCancelBtn = document.getElementById('visitorCancelBtn');
 
     function openModal() {
         if (modalOverlay) {
@@ -162,9 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', closeModal);
-    }
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (stallCancelBtn) stallCancelBtn.addEventListener('click', closeModal);
+    if (visitorCancelBtn) visitorCancelBtn.addEventListener('click', closeModal);
 
     if (modalOverlay) {
         modalOverlay.addEventListener('click', (e) => {
@@ -179,6 +181,37 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    // ----------------------------------------------------------------------
+    // MODAL TAB SWITCHER (STALL BOOKING vs VISITOR REGISTRATION)
+    // ----------------------------------------------------------------------
+    const tabStallBtn = document.getElementById('tabStallBtn');
+    const tabVisitorBtn = document.getElementById('tabVisitorBtn');
+    const stallForm = document.getElementById('stallForm');
+    const visitorForm = document.getElementById('visitorForm');
+
+    function switchModalTab(targetTab) {
+        if (targetTab === 'stall') {
+            tabStallBtn.classList.add('active');
+            tabStallBtn.setAttribute('aria-selected', 'true');
+            tabVisitorBtn.classList.remove('active');
+            tabVisitorBtn.setAttribute('aria-selected', 'false');
+            stallForm.style.display = 'block';
+            visitorForm.style.display = 'none';
+        } else {
+            tabVisitorBtn.classList.add('active');
+            tabVisitorBtn.setAttribute('aria-selected', 'true');
+            tabStallBtn.classList.remove('active');
+            tabStallBtn.setAttribute('aria-selected', 'false');
+            visitorForm.style.display = 'block';
+            stallForm.style.display = 'none';
+        }
+    }
+
+    if (tabStallBtn && tabVisitorBtn) {
+        tabStallBtn.addEventListener('click', () => switchModalTab('stall'));
+        tabVisitorBtn.addEventListener('click', () => switchModalTab('visitor'));
+    }
 
     // ----------------------------------------------------------------------
     // 6. FORM SUBMISSIONS (INTERACTIVE FEEDBACK)
@@ -202,22 +235,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const modalEnquiryForm = document.getElementById('modalEnquiryForm');
-    const modalFormFeedback = document.getElementById('modalFormFeedback');
-
-    if (modalEnquiryForm) {
-        modalEnquiryForm.addEventListener('submit', (e) => {
+    // Stall Form Submit
+    const stallFormFeedback = document.getElementById('stallFormFeedback');
+    if (stallForm) {
+        stallForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const mName = document.getElementById('mFullName').value;
+            const sName = document.getElementById('stallName').value;
 
-            modalFormFeedback.className = 'form-feedback success';
-            modalFormFeedback.innerHTML = `Thank you, <strong>${mName}</strong>! Your registration enquiry is submitted.`;
-            modalEnquiryForm.reset();
+            stallFormFeedback.className = 'form-feedback success';
+            stallFormFeedback.innerHTML = `Thank you, <strong>${sName}</strong>! Your Stall Booking request for India Bakery Expo 2026 has been submitted.`;
+            stallForm.reset();
 
             setTimeout(() => {
                 closeModal();
-                modalFormFeedback.innerHTML = '';
-                modalFormFeedback.className = 'form-feedback';
+                stallFormFeedback.innerHTML = '';
+                stallFormFeedback.className = 'form-feedback';
+            }, 2500);
+        });
+    }
+
+    // Visitor Form Submit
+    const visitorFormFeedback = document.getElementById('visitorFormFeedback');
+    if (visitorForm) {
+        visitorForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const vName = document.getElementById('visitorName').value;
+
+            visitorFormFeedback.className = 'form-feedback success';
+            visitorFormFeedback.innerHTML = `Thank you, <strong>${vName}</strong>! Your Visitor Registration for India Bakery Expo 2026 is confirmed.`;
+            visitorForm.reset();
+
+            setTimeout(() => {
+                closeModal();
+                visitorFormFeedback.innerHTML = '';
+                visitorFormFeedback.className = 'form-feedback';
             }, 2500);
         });
     }
