@@ -389,12 +389,12 @@ textarea {
 
 .hero-bg-image {
     position: absolute;
-    top: 55px;
+    top: 95px;
     left: 0;
     width: 100%;
-    height: calc(93% - 35px);
+    height: calc(100% - 95px);
     background-size: cover;
-    background-position: center center;
+    background-position: center top;
     background-repeat: no-repeat;
     z-index: 1;
 }
