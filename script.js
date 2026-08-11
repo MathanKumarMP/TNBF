@@ -489,7 +489,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             submittedMobiles.add(mobileCheck.cleaned);
             stallForm.reset();
-            window.location.href = 'thank-you.html';
+            closeModal();
+            window.open('thank-you.html', '_blank');
         });
     }
 
@@ -556,7 +557,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             submittedMobiles.add(mobileCheck.cleaned);
             visitorForm.reset();
-            window.location.href = 'thank-you.html';
+            closeModal();
+            window.open('thank-you.html', '_blank');
         });
     }
 

@@ -278,8 +278,15 @@ textarea {
     justify-content: space-between;
 }
 
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
 .header-logo-img {
-    height: 72px;
+    height: 67px;
     width: auto;
     object-fit: contain;
     mix-blend-mode: multiply;
@@ -454,9 +461,29 @@ textarea {
     font-size: 1.18rem;
     color: var(--dark);
     line-height: 1.65;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     max-width: 720px;
     font-weight: 500;
+}
+
+.hero-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #000000;
+    background-color: rgba(217, 154, 53, 0.15);
+    border: 1px solid rgba(217, 154, 53, 0.4);
+    padding: 0.45rem 1.1rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    white-space: nowrap;
+}
+
+.hero-date-badge svg {
+    color: #000000;
 }
 
 .hero-float-badge-full {
@@ -1926,6 +1953,10 @@ textarea {
     align-items: start;
 }
 
+.mobile-only-social {
+    display: none !important;
+}
+
 .logo-footer {
     margin-bottom: 1.25rem;
 }
@@ -3115,7 +3146,7 @@ textarea {
         padding: 0 1.25rem;
     }
 
-    /* HEADER: hide nav and hamburger entirely (single page — no mobile menu needed) */
+    /* HEADER: hide nav, hamburger, and header actions button on mobile */
     .nav-menu {
         display: none !important;
     }
@@ -3124,20 +3155,12 @@ textarea {
         display: none !important;
     }
 
-    /* Header & Hero Buttons equal size on mobile */
-    .header-actions .btn,
-    .hero-cta-group .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.86rem;
-        font-weight: 700;
-        padding: 0.65rem 1.35rem;
-        height: 42px;
-        box-sizing: border-box;
-        gap: 0.45rem;
-        white-space: nowrap;
-        border-radius: 50px;
+    .header-actions {
+        display: none !important;
+    }
+
+    .hero-date-badge {
+        display: none !important;
     }
 
     /* HERO */
@@ -3456,9 +3479,28 @@ textarea {
     }
 
     /* FOOTER */
+    .desktop-social-links {
+        display: none !important;
+    }
+
+    .mobile-only-social {
+        display: block !important;
+    }
+
     .footer-container {
-        gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem 1.25rem;
         padding-bottom: 2rem;
+    }
+
+    .footer-brand-col,
+    .footer-info-col {
+        grid-column: span 2;
+    }
+
+    .footer-links-col,
+    .footer-social-col {
+        grid-column: span 1;
     }
 
     .footer-logo-img {
